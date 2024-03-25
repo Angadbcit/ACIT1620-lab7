@@ -19,80 +19,80 @@ export function shuffle(list) {
 }
 
 export function getCard() {
-    return getCardNode().alt;
     /**
      * Get answer card name
      */
+    return getCardNode().alt;
 }
 
 export function getCardNode() {
-    return document.querySelector('.answer img');
     /**
      * Get answer card image node
      */
+    return document.querySelector('.answer img');
 }
 
 export function getCheckbox() {
-    return document.querySelector('#tries-checkbox');
     /**
      * Get checkbox node
      */
+    return document.querySelector('#tries-checkbox');
 }
 
 export function getContinueBtn() {
-    return document.querySelector('#continue');
     /**
      * Get 'continue/try again' button node
      */
+    return document.querySelector('#continue');
 }
 
 export function getNumberInput() {
-    return document.querySelector('#num-tries');
     /**
      * Get number input node
      */
+    return document.querySelector('input[type="number"]');
 }
 
 export function getOutput() {
-    return document.querySelector('output');
     /**
      * Get output node
      */
+    return document.querySelector('output');
 }
 
 export function getPanel() {
-    return document.querySelector('main > div:last-child');
     /**
      * Get card selection panel node
      */
+    return document.querySelector('main > div:last-child');
 }
 
 export function getTiles() {
-    return document.querySelectorAll('.tiles input');
     /**
      * Get the card tiles
      */
+    return document.querySelectorAll('.tiles input');
 }
 
 export function getTries() {
-    return getNumberInput().value;
     /**
      * Get the current value of tries
      */
+    return getNumberInput().value;
 }
 
 export function getRestartBtn() {
-    return document.querySelector('#restart');
     /**
      * Get 'restart' button node
      */
+    return document.querySelector('#restart');
 }
 
 export function getShowBtn() {
-    return document.querySelector('#show-btn');
     /**
      * Get 'show' button node
      */
+    return document.querySelector('#show-btn');
 }
 
 export function setCard() {
@@ -112,39 +112,41 @@ export function setCard() {
         'king of diamonds', 
         'queen of spades'
     ];
-
-    const dex = math.round(math.random() * 9)   //coulad also use math.floor to round
-    const card = cards[dex];
+    const idx = Math.floor(Math.random() * 9);
+    const card = cards[idx];
     const path = card.split(' ').join('_');
     const cardNode = getCardNode();
     cardNode.src = `images/${path}.svg`;
     cardNode.alt = card;
+
     // hide the card
     cardNode.classList.toggle('hidden', true);
+
      // cancel the animation
-    getCardNode().classList.toggle('fade', false);
+    cardNode.classList.toggle('fade', false)
+    cardNode.parentNode.classList.toggle('flip', false)
 }
 
 export function showCard() {
-    getCardNode().classList.toggle('hidden', false);
-    getShowBtn().toggleAttribute('disabled', true)
-    
-    document.querySelector('.answer').classList.toggle('flip', true);
-    getCardNode().classList.toggle('fade', true);
     /**
      * Show the answer card and disable the 'show' button
      */
+    getCardNode().classList.toggle('hidden', false);
+    getShowBtn().toggleAttribute('disabled', true);
+
     // animate the card
+
+    getCardNode().classList.toggle('fade', true)
+    getCardNode().parentNode.classList.toggle('flip', true)
 
 }
 
 export function toggleInputState(e) {
-    getNumberInput().toggleAttribute('disabled', !e.target.checked);
     /**
      * Toggle active state of the number input node
      * This depends on whether the checkbox is checked or note.
      * The information is available in the event object passed to the
      * function at call time.
      */
+    getNumberInput().toggleAttribute('disabled', !e.target.checked);
 }
-
